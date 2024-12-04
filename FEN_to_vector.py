@@ -18,10 +18,10 @@ def to_vector(FEN):
     i = 0
     j = 0
     for char in board:
-        if char.isAlpha():
+        if char.isalpha():
             board_vector[i][j][piece_to_num[char]] = 1
             i += 1
-        if char.isNum():
+        if char.isnumeric():
             i += int(char)
         if char == '/':
             j += 1
@@ -43,8 +43,13 @@ def to_vector(FEN):
     
     if ep != '-':
         file = alphabet[ep[0]]
-        row = int(ep[1]) / 3 - 1
+        row = int(int(ep[1]) / 3 - 1)
         ep_vector[file][row] = 1
     
-    final_vector = np.concatenate([board_vector.flatten(), player_vector, castling_vector, ep_vector, half_move_vector])
+    v1 = board_vector.flatten()
+    v2 = player_vector
+    v3 = castling_vector
+    v4 = ep_vector.flatten()
+    v5 = half_move_vector
+    final_vector = np.concatenate([v1, v2, v3, v4, v5])
     return final_vector
