@@ -115,6 +115,6 @@ def eval_harness(board, eval=random_eval):
             return float('-inf')
         if res == '1/2-1/2':
             return float(0)
-    return eval(board)
+    return eval(board.fen())
 
 game(random_eval, player='select')
